@@ -1,4 +1,4 @@
-[English](README-EN.md)
+[English](README.md)
 
 # DBeaver Agent for updated DBeaver License Key
 

@@ -141,6 +141,63 @@ When registering the license for the first time, it is recommended to start DBea
 /path/to/dbeaver/dbeaver
 ```
 
+Here’s a polished, clear version of your instructions with corrected spelling and formatting for Windows users:
+
+---
+## **Windows Setup Instructions**
+
+**Important Notes**
+
+- Works only with **Ultimate, Pro, or Enterprise editions**. Not compatible with Community edition.
+- Requires **OpenJDK 21**.
+
+---
+
+### 1. Place the Agent JAR
+
+Download the agent JAR:
+
+```
+dbeaver-agent-25.2-SNAPSHOT-jar-with-dependencies.jar
+```
+
+Place it in your DBeaver Ultimate folder:
+
+```
+C:\Users\<YourUser>\AppData\Local\DBeaverUltimate
+```
+
+---
+
+### 2. Update `dbeaver.ini`
+
+Open `dbeaver.ini` and add at the **end of `-vmargs`**:
+
+```
+-javaagent:dbeaver-agent-25.2-SNAPSHOT-jar-with-dependencies.jar
+-Xbootclasspath/a:dbeaver-agent-25.2-SNAPSHOT-jar-with-dependencies.jar
+```
+
+---
+
+### 3. Replace DBeaver Internal JRE
+
+1. Download **OpenJDK 21** (Zulu/GraalVM).
+2. Locate JRE folder, e.g.:
+
+```
+C:\Program Files\Zulu\zulu-21
+```
+
+3. Delete everything in DBeaver JRE folder:
+
+```
+C:\Users\<YourUser>\AppData\Local\DBeaverUltimate\jre
+```
+
+4. Copy all contents from Zulu 21 JRE into the DBeaver JRE folder.
+5. Complete.
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=wgzhao/dbeaver-agent&type=Date)](https://www.star-history.com/#wgzhao/dbeaver-agent&Date)

@@ -1,4 +1,4 @@
-[中文说明](README.md)
+[中文说明](README-CN.md)
 
 # DBeaver Agent for updated DBeaver License Key
 

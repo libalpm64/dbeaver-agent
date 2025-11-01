@@ -30,11 +30,13 @@ jobs:
 
       - name: Get version from tag
         id: get_version
+        shell: bash
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
           else
             echo "VERSION=SNAPSHOT" >> $GITHUB_OUTPUT
+          fi
 
       - name: Prepare release folder
         run: |

@@ -1,9 +1,11 @@
-name: Release
+name: Build and Release
 
 on:
   push:
+    branches:
+      - '**'   # Run on all branches
     tags:
-      - 'v*'  # Trigger only when tags starting with 'v' are pushed
+      - 'v*'
 
 jobs:
   build-and-release:
@@ -23,9 +25,14 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Get version from tag
+      - name: Get version from tag (if tag exists)
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=SNAPSHOT" >> $GITHUB_OUTPUT
+          fi
 
       - name: Rename JAR file
         run: |
@@ -33,6 +40,7 @@ jobs:
           cp target/dbeaver-agent-*-jar-with-dependencies.jar release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar
 
       - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v1
         with:
           name: DBeaver Agent ${{ steps.get_version.outputs.VERSION }}
@@ -44,12 +52,12 @@ jobs:
             
             ## Installation
             See README for installation instructions.
-          files: |
-            release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar
+          files: release/dbeaver-agent-${{ steps.get_version.outputs.VERSION }}.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to GitHub Packages
+        if: startsWith(github.ref, 'refs/tags/v')
         run: |
           mvn deploy:deploy-file \
             -DgroupId=com.github.wgzhao \

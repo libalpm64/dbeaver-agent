@@ -141,8 +141,6 @@ When registering the license for the first time, it is recommended to start DBea
 /path/to/dbeaver/dbeaver
 ```
 
-Here’s a polished, clear version of your instructions with corrected spelling and formatting for Windows users:
-
 ---
 ## **Windows Setup Instructions**
 

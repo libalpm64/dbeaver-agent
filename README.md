@@ -153,13 +153,7 @@ When registering the license for the first time, it is recommended to start DBea
 
 ### 1. Place the Agent JAR
 
-Download the agent JAR:
-
-```
-dbeaver-agent-25.2-SNAPSHOT-jar-with-dependencies.jar
-```
-
-Place it in your DBeaver Ultimate folder:
+Place the agent (dbeaver-agent-25.2-SNAPSHOT-jar-with-dependencies.jar) in your DBeaver Ultimate folder:
 
 ```
 C:\Users\<YourUser>\AppData\Local\DBeaverUltimate
